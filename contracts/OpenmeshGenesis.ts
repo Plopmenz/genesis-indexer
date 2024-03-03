@@ -1,5 +1,5 @@
 export const OpenmeshGenesisContract = {
-  address: "0x0000000000000000000000000000000000000000",
+  address: "0x1E856E7dccD4Bc3D0c241178C99dac37e2709b3f",
   abi: [
     {
       type: "constructor",
@@ -18,11 +18,6 @@ export const OpenmeshGenesisContract = {
           name: "_nft",
           type: "address",
           internalType: "contract IERC721Mintable",
-        },
-        {
-          name: "_treasury",
-          type: "address",
-          internalType: "address payable",
         },
         { name: "_start", type: "uint32", internalType: "uint32" },
         {
@@ -132,13 +127,6 @@ export const OpenmeshGenesisContract = {
       name: "tokensPerWeiPerPeriod",
       inputs: [{ name: "", type: "uint256", internalType: "uint256" }],
       outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
-      stateMutability: "view",
-    },
-    {
-      type: "function",
-      name: "treasury",
-      inputs: [],
-      outputs: [{ name: "", type: "address", internalType: "address payable" }],
       stateMutability: "view",
     },
     {
