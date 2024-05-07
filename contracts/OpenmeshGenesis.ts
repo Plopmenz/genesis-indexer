@@ -1,5 +1,5 @@
 export const OpenmeshGenesisContract = {
-  address: "0x18B6A19e3a03A4A5bEaf0Ff3D43b2F1C7183DFcE",
+  address: "0x514F36116D7b556D7B36A45Eef05FACE39994c8C",
   abi: [
     {
       type: "constructor",
@@ -91,7 +91,7 @@ export const OpenmeshGenesisContract = {
       name: "publicMint",
       inputs: [],
       outputs: [],
-      stateMutability: "nonpayable",
+      stateMutability: "payable",
     },
     {
       type: "function",
@@ -115,7 +115,7 @@ export const OpenmeshGenesisContract = {
         { name: "_mintTime", type: "uint32", internalType: "uint32" },
       ],
       outputs: [],
-      stateMutability: "nonpayable",
+      stateMutability: "payable",
     },
     {
       type: "function",
