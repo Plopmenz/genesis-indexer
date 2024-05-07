@@ -11,28 +11,28 @@ function malformedRequest(res: Response, error: string): void {
 export function registerRoutes(app: Express, storage: Storage) {
   const basePath = "/indexer/";
 
-  // Gets a single contribution
-  app.get(basePath + "contribution/:contributionIndex", async function (req, res) {
-    const contributionIndex = parseInt(req.params.contributionIndex);
-    if (Number.isNaN(contributionIndex)) {
-      return malformedRequest(res, "contributionIndex is not a valid number");
+  // Gets a single mint
+  app.get(basePath + "mint/:mintIndex", async function (req, res) {
+    const mintIndex = parseInt(req.params.mintIndex);
+    if (Number.isNaN(mintIndex)) {
+      return malformedRequest(res, "mintIndex is not a valid number");
     }
 
-    const contributions = await storage.contributions.get();
-    const contribution = contributions.at(contributionIndex);
-    if (!contribution) {
+    const mints = await storage.mints.get();
+    const mint = mints.at(mintIndex);
+    if (!mint) {
       res.statusCode = 404;
-      return res.end("Contribution not found");
+      return res.end("Mint not found");
     }
 
-    res.end(JSON.stringify(contribution, replacer));
+    res.end(JSON.stringify(mint, replacer));
   });
 
-  // Gets the total number of verified contributors
-  app.get(basePath + "totalContributions", async function (req, res) {
-    const contributions = await storage.contributions.get();
-    const totalContributions = contributions.length;
+  // Gets the total number of mints
+  app.get(basePath + "totalMint", async function (req, res) {
+    const mints = await storage.mints.get();
+    const totalMints = mints.length;
 
-    res.end(JSON.stringify({ totalContributions: totalContributions }, replacer));
+    res.end(JSON.stringify({ totalMints: totalMints }, replacer));
   });
 }

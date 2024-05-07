@@ -1,13 +1,13 @@
 import { Storage } from "..";
 import { ContractWatcher } from "../utils/contract-watcher";
-import { Contribution } from "../types/contribution";
+import { Mint } from "../types/mint";
 import { OpenmeshGenesisContract } from "../contracts/OpenmeshGenesis";
 
-export function watchContribtionMade(contractWatcher: ContractWatcher, storage: Storage) {
-  contractWatcher.startWatching("ContribtionMade", {
+export function watchMint(contractWatcher: ContractWatcher, storage: Storage) {
+  contractWatcher.startWatching("Mint", {
     abi: OpenmeshGenesisContract.abi,
     address: OpenmeshGenesisContract.address,
-    eventName: "ContributionMade",
+    eventName: "Mint",
     strict: true,
     onLogs: async (logs) => {
       await Promise.all(
@@ -17,17 +17,17 @@ export function watchContribtionMade(contractWatcher: ContractWatcher, storage: 
           const event = {
             transactionHash,
             ...args,
-          } as Contribution;
+          } as Mint;
 
-          await processContribtionMade(event, storage);
+          await processMint(event, storage);
         })
       );
     },
   });
 }
 
-export async function processContribtionMade(event: Contribution, storage: Storage): Promise<void> {
-  await storage.contributions.update((contributions) => {
-    contributions.push(event);
+export async function processMint(event: Mint, storage: Storage): Promise<void> {
+  await storage.mints.update((mints) => {
+    mints.push(event);
   });
 }

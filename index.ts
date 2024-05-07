@@ -5,13 +5,13 @@ import { sepolia } from "viem/chains";
 
 import { registerRoutes } from "./api/simple-router";
 import { PersistentJson } from "./utils/persistent-json";
-import { watchContribtionMade } from "./event-watchers/ContributionMade";
-import { Contribution } from "./types/contribution";
+import { watchMint } from "./event-watchers/Mint";
+import { Mint } from "./types/mint";
 import { MultischainWatcher } from "./utils/multichain-watcher";
 
-export type ContributionsStorage = Contribution[];
+export type MintsStorage = Mint[];
 export interface Storage {
-  contributions: PersistentJson<ContributionsStorage>;
+  mints: PersistentJson<MintsStorage>;
 }
 
 async function start() {
@@ -31,11 +31,11 @@ async function start() {
   // Data (memory + json files (synced) currently, could be migrated to a database solution if needed in the future)
   await storageManager.init({ dir: "storage" });
   const storage: Storage = {
-    contributions: new PersistentJson<ContributionsStorage>("contributors", []),
+    mints: new PersistentJson<MintsStorage>("mints", []),
   };
 
   multichainWatcher.forEach((contractWatcher) => {
-    watchContribtionMade(contractWatcher, storage);
+    watchMint(contractWatcher, storage);
   });
 
   process.on("SIGINT", function () {

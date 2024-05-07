@@ -1,7 +1,7 @@
-import { Contribution } from "../types/contribution";
+import { Mint } from "../types/mint";
 
-export type ContributionReturn = Contribution;
+export type MintReturn = Mint;
 
-export interface TotalContributionsReturn {
-  totalContributions: number;
+export interface TotalMintsReturn {
+  totalMints: number;
 }
